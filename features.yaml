@@ -1,0 +1,28 @@
+stack:
+    - React
+    - Typescript
+    - Context
+    - Node/express
+    - GraphQL
+    - Socket.io
+    - MongoDB
+
+(Sunday tak)
+client:
+    - Login (Akhil)
+    - Register (Akhil)
+    - Ability to create a room (Akhil)
+    - Ability to see players in the lobby (Akhil)
+    - Ability to join a room (Akhil)
+    - Ability to see other players position (Ujjwal)
+    - Main game logic (Ujjwal)
+    # - Apollo client
+    # - Stats Page
+    #         - WPM
+    #         - Accuracy
+
+server:
+    - Socket.io rooms
+    - Authentication
+    - UserSchema
+    - GameSchema

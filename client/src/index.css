@@ -33,7 +33,7 @@ html {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -42,7 +42,8 @@ body {
   overflow-x: hidden;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: inherit;
   text-decoration: none;
 }

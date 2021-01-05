@@ -1,0 +1,55 @@
+.play{
+    font-family: $font-family, sans-serif, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 82vh;
+    padding: 3rem;
+    
+    section{
+background-color: #1D1C20;
+height: 15rem;
+width: 15rem;
+margin:  0 3rem;
+padding: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+
+input{
+    background-color: #333;
+    padding: .5rem .25rem;
+    color: #fefefe;
+    font-size: 1.25rem;
+    width: 50%;
+    // margin-top: 2rem;
+}
+
+button{
+    padding: .35rem 1rem;
+    background-color: #303033;
+    color: #fefefe;
+    font-size: 1.25rem;
+    transition: .2s all;
+    // margin: 2rem 0;
+
+    &:hover{
+        background-color: #39393a;
+
+        }
+
+}
+
+&:first-child{
+    button{
+    margin: auto 0;
+
+    }
+}
+
+
+
+
+    }
+}

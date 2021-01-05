@@ -1,17 +1,37 @@
 import React, { ReactElement } from "react";
 
-import { letter } from "../../types";
+import { Letter } from "../../types";
 
 interface IProps {
-  textArr: letter[];
+  textArr: Letter[];
 }
 
-export default function Divify<IProps>({ textArr }: IProps): ReactElement {
+const Divify: React.FC<IProps> = ({ textArr }: IProps) => {
+  console.log("Divify is called");
   return (
     <React.Fragment>
-      {textArr.map((letter: any) => {
-        return <span>{letter.val}</span>;
-      })}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {textArr.map((letter: Letter) => {
+          return (
+            <span
+              style={{
+                backgroundColor:
+                  letter.color === "green"
+                    ? "green"
+                    : letter.color === "red"
+                    ? "red"
+                    : "grey",
+                padding: "10px",
+                margin: "2px",
+              }}
+            >
+              {letter.value}{" "}
+            </span>
+          );
+        })}
+      </div>
     </React.Fragment>
   );
-}
+};
+
+export default Divify;

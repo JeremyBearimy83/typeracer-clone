@@ -38,34 +38,34 @@ export default function Game(): ReactElement {
         return prev - 1;
       });
     else setLetterCount((prev) => prev + 1);
-  }, [text]);
+  }, [currentWord]);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Shift") return;
-    if (event.key === "Backspace") {
-      setText((prevText) => {
-        console.log("grey is called");
-        const newText = Object.assign([], prevText, {
-          [letterCount]: { ...text[letterCount], color: "grey" },
-        });
-        return newText;
-      });
-    } else if (event.key === text[letterCount].value) {
-      setText((prevText) => {
-        const newText = Object.assign([], prevText, {
-          [letterCount]: { ...text[letterCount], color: "green" },
-        });
-        return newText;
-      });
-    } else if (event.key !== text[letterCount].value) {
-      setText((prevText) => {
-        const newText = Object.assign([], prevText, {
-          [letterCount]: { ...text[letterCount], color: "red" },
-        });
-        return newText;
-      });
-    }
-  };
+  // const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (event.key === "Shift") return;
+  //   if (event.key === "Backspace") {
+  //     setText((prevText) => {
+  //       console.log("grey is called");
+  //       const newText = Object.assign([], prevText, {
+  //         [letterCount]: { ...text[letterCount], color: "grey" },
+  //       });
+  //       return newText;
+  //     });
+  //   } else if (event.key === text[letterCount].value) {
+  //     setText((prevText) => {
+  //       const newText = Object.assign([], prevText, {
+  //         [letterCount]: { ...text[letterCount], color: "green" },
+  //       });
+  //       return newText;
+  //     });
+  //   } else if (event.key !== text[letterCount].value) {
+  //     setText((prevText) => {
+  //       const newText = Object.assign([], prevText, {
+  //         [letterCount]: { ...text[letterCount], color: "red" },
+  //       });
+  //       return newText;
+  //     });
+  //   }
+  // };
 
   console.log({ text });
   return (

@@ -31,15 +31,6 @@ export default function Game(): ReactElement {
     setCurrentWord(event.target.value);
   };
 
-  useEffect(() => {
-    if (text[letterCount].color === "grey")
-      setLetterCount((prev) => {
-        console.log("DEcrement is caleld");
-        return prev - 1;
-      });
-    else setLetterCount((prev) => prev + 1);
-  }, [text]);
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Shift") return;
     if (event.key === "Backspace") {

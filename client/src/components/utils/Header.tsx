@@ -36,6 +36,10 @@ export default function Header(): ReactElement {
           <i className="fas fa-keyboard"></i>
           Play
         </NavLink>
+        <NavLink to="/dummyroom" activeClassName="link-active">
+          <i className="fas fa-keyboard"></i>
+          Test
+        </NavLink>
       </nav>
     </React.Fragment>
   );

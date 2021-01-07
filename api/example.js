@@ -9,7 +9,6 @@ const {
   GraphQLNonNull,
 } = require("graphql");
 const dotenv = require("dotenv");
-const { type } = require("os");
 
 const app = express();
 dotenv.config();

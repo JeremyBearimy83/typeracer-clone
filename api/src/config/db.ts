@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export default () => {
   if (!process.env.MONGO_URI) {
-    throw new Error("Enironment Invalid");
+    throw new Error("Environment Invalid");
   }
 
   mongoose.connect(
@@ -10,7 +10,6 @@ export default () => {
     {
       useNewUrlParser: true,
       useCreateIndex: true,
-      useFindAndModify: false,
       useUnifiedTopology: true,
     },
     (err) => {

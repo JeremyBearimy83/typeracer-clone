@@ -9,19 +9,18 @@ interface IProps {
 const Divify: React.FC<IProps> = ({ textArr }: IProps) => {
   return (
     <React.Fragment>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div className="letter-container">
         {textArr.map((letter: Letter) => {
           return (
             <span
+              className="letter"
               style={{
                 backgroundColor:
                   letter.color === "green"
-                    ? "green"
+                    ? "#7bc74d"
                     : letter.color === "red"
-                    ? "red"
-                    : "grey",
-                padding: "10px",
-                margin: "2px",
+                    ? "#f33535"
+                    : "#1D1C20",
               }}
             >
               {letter.value}{" "}

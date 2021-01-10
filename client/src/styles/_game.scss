@@ -1,0 +1,41 @@
+.game{
+    min-height: 82vh;
+    padding: 3rem;
+    font-family: $font-family, sans-serif, serif;
+
+    .input-container{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+
+
+
+        input{
+            padding: .5rem 1rem;
+            background-color: #333333;
+            color: #fefefe;
+            border-radius: 5px;
+            font-size: 1.5rem;
+        }
+
+    }
+
+
+
+}
+
+
+.letter-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: auto;
+    background-color: #1D1C20;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.letter{
+    padding: .2rem;
+    font-size: 1.5rem;
+}

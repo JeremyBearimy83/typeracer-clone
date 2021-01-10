@@ -88,16 +88,17 @@ export default function Game(): ReactElement {
 
   //console.log({ text });
   return (
-    <React.Fragment>
+    <div className="game">
       <Divify textArr={text} />
-      <input
-        style={{ padding: "20px" }}
-        type="text"
-        value={currentWord}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-      />
-    </React.Fragment>
+      <div className="input-container">
+        <input
+          type="text"
+          value={currentWord}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -120,3 +121,4 @@ export default function Game(): ReactElement {
 
 // ANYTHING ELSE?
 //THAT'S IT FOR NOW I GUESS
+// BRUH THE WORDS ARE WRAPPING. DO WE WANT THIS BEHAVIOUR?

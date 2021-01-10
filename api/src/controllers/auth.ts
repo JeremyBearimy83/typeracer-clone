@@ -11,12 +11,19 @@ export const userSignUp = async (
     const exisitngUser = await User.findOne({ email });
 
     if (exisitngUser) {
-      return "Email is already in use";
+      return {
+        message: "Email is already in use",
+        success: false,
+      };
     }
 
+    // const existingUsername = await User.findOne({ username });
+
+    const id = Math.floor(1000 + Math.random() * 9000);
     const hashedPass = await bcrypt.hash(password, 10);
 
     let user = new User({
+      id,
       username,
       email,
       password: hashedPass,
@@ -24,9 +31,16 @@ export const userSignUp = async (
 
     user = await user.save();
 
-    return "User Created Succesfully";
+    return {
+      message: "User Created Succesfully",
+      success: true,
+    };
   } catch (err) {
-    return "Internal Server Error";
+    console.log(err);
+    return {
+      message: "Internal Server Error",
+      success: false,
+    };
   }
 };
 

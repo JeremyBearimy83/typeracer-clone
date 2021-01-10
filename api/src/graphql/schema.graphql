@@ -2,10 +2,9 @@ type Query {
    greeting: String!
 }
 
-# type Mutation{
-   # userLogIn:(email:String,password:String):String
-   # userRegister:(email:String,password:String):String
-   # userLogOut:(email:String,password:String):String
-# }
+type Mutation{
+   userSignUp(username:String,email:String,password:String):String
+   userLogIn(email:String,password:String):String
+}
 
 

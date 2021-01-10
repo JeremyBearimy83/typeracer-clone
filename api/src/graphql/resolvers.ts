@@ -1,5 +1,12 @@
 export default {
   Query: {
-    hello: () => "Hello World",
+    greeting: () => "Hello World",
   },
+  // Mutation: {
+  // userLogIn: (root: any, args: any) => {
+  //   return "string";
+  // },
+  // userRegister: () => {},
+  // userLogOut: () => {},
+  // },
 };

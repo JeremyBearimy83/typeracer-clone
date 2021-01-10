@@ -163,3 +163,25 @@ app.use(
 app.listen(process.env.PORT, () => {
   console.log(`Server Running on port ${process.env.PORT}...`);
 });
+
+//  schema {
+//       query: Query
+//        # is the default
+//    }
+
+// query JobQuery($id:ID!){
+//   job(id:$id){
+//     title
+//   }
+// }
+
+// mutation {
+//   job: createJob(title:"ewsas",description:"sdjcasx",companyId:"ejkasdn")
+//   aliasses
+//  }
+
+// input createJobInput {
+//   title:String
+//   description:String,
+//   companyId:ID
+// }

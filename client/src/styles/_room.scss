@@ -1,0 +1,41 @@
+.room{
+    font-family: $font-family, sans-serif, serif;
+    min-height: 82vh;
+    padding: 3rem;
+
+    h1{
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        // text-align: center;
+
+        span{
+            color: $orange;
+        }
+    }
+
+    
+
+        h2{
+            font-size: 2.5rem;
+
+        }
+
+        .player{
+            margin: .5rem 0;
+            font-size: 1.25rem;
+
+            i{
+                margin-right: .5rem;
+            }
+        }
+    
+        button{
+            padding: .5rem 1rem;
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            border-radius: 5px;
+            color: #212121;
+            font-weight: bold;
+            transition: .2s all;
+        }
+}

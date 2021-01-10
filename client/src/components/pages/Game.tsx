@@ -1,23 +1,32 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useState, useEffect, useRef } from "react";
 
-import Divify from "./Divify";
+import Divify from "../utils/Divify";
 
 import { Letter } from "../../types";
+import { useLocation } from "react-router-dom";
 
-const textString: string =
-  "Synthetic emotions in the form of pills, psychological warfare in the form of advertising, mind-altering chemicals in the form of food, brainwashing seminars in the form of media, controlled isolated bubbles in the form of social networks.";
+// const textString: string =
+//   "Synthetic emotions in the form of pills, psychological warfare in the form of advertising, mind-altering chemicals in the form of food, brainwashing seminars in the form of media, controlled isolated bubbles in the form of social networks.";
 
 // const textString: string = "Please work :)";
 
-//STORES AN ARRAY OF WORDS
-const wordsArr: string[] = textString.split(" ");
-
-//STORES ARRAY OF LETTER OBJECTS
-const textArr: Letter[] = textString
-  .split("")
-  .map((val) => ({ value: val, color: "grey" }));
-
 export default function Game(): ReactElement {
+  //FOR COUNDOWN
+  const [started, setStarted] = useState(false);
+
+  // GETS PARAGRAPH FROM ROOM
+  const {
+    state: { textString },
+  }: any = useLocation();
+
+  //STORES AN ARRAY OF WORDS
+  const wordsArr: string[] = textString.split(" ");
+
+  //STORES ARRAY OF LETTER OBJECTS
+  const textArr: Letter[] = textString
+    .split("")
+    .map((val: string) => ({ value: val, color: "grey" }));
+
   const [text, setText] = useState<Letter[]>(textArr);
   //THE INDEX I AM  CURRENTLY ON IN THE LETTER ARRAY
   //const [letterCount, setLetterCount] = useState<number>(1);
@@ -29,6 +38,8 @@ export default function Game(): ReactElement {
 
   //CURRENT WORD BEING TYPED IN THE INPUT
   const [currentWord, setCurrentWord] = useState<any>("");
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("HANDLE IN PUT CHANGE IN CALLED");
@@ -86,18 +97,55 @@ export default function Game(): ReactElement {
     }
   }, [wordStartIndex]);
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [started]);
+
   //console.log({ text });
-  return (
+  return started ? (
     <div className="game">
       <Divify textArr={text} />
       <div className="input-container">
         <input
+          ref={inputRef}
           type="text"
           value={currentWord}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
       </div>
+    </div>
+  ) : (
+    <Countdown start={() => setStarted(true)} />
+  );
+}
+
+function Countdown({ start }: { start: () => void }): ReactElement {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (current === 3) start();
+    setTimeout(() => {
+      setCurrent((prev) => prev + 1);
+    }, 800);
+  }, [current]);
+
+  const hints = ["Get Ready", "Hands on the board", "Go!"];
+
+  return (
+    <div className="countdown">
+      <section>
+        <div style={{ opacity: current == 0 ? 1 : 0.4 }} className="red"></div>
+        <div
+          style={{ opacity: current == 1 ? 1 : 0.4 }}
+          className="orange"
+        ></div>
+        <div
+          style={{ opacity: current == 2 ? 1 : 0.4 }}
+          className="green"
+        ></div>
+      </section>
+      <section>{hints[current]}</section>
     </div>
   );
 }

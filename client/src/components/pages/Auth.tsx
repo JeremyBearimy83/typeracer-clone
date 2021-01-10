@@ -98,6 +98,7 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
 function Register({ switchPage }: { switchPage: () => void }): ReactElement {
   const [errors, setErrors] = useState<string[]>([]);
 
+  const [username, setUsername, resetUsername] = useInputState();
   const [email, setEmail, resetEmail] = useInputState();
   const [pass, setPass, resetPass] = useInputState();
   const [confirmPass, setConfirmPass, resetConfirmPass] = useInputState();
@@ -105,6 +106,7 @@ function Register({ switchPage }: { switchPage: () => void }): ReactElement {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: string[] = [];
+    if (!username) errors.push("Username is Required");
     if (!email) errors.push("Email is Required");
     else if (!validateEmail(email)) errors.push("Invalid Email ID");
     if (!pass) errors.push("Password is Required");
@@ -126,6 +128,16 @@ function Register({ switchPage }: { switchPage: () => void }): ReactElement {
         {errors.map((err) => {
           return <div className="error">{err}</div>;
         })}
+        <div className="input">
+          <label htmlFor="username">Username</label>
+          <input
+            value={username}
+            onChange={setUsername}
+            id="username"
+            type="text"
+            placeholder="JohnDoe"
+          />
+        </div>
         <div className="input">
           <label htmlFor="email">Email</label>
           <input

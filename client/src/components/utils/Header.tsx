@@ -16,8 +16,8 @@ export default function Header(): ReactElement {
         <div className="right">
           <div className="player">
             <i className="fas fa-user"></i>
-            <span>AKhForty7</span>
-            #1337
+            <span>Guest</span>
+            {/* #1337 */}
           </div>
           <Link to="/auth">
             <button>
@@ -35,10 +35,6 @@ export default function Header(): ReactElement {
         <NavLink to="/play" activeClassName="link-active">
           <i className="fas fa-keyboard"></i>
           Play
-        </NavLink>
-        <NavLink to="/dummyroom" activeClassName="link-active">
-          <i className="fas fa-keyboard"></i>
-          Test
         </NavLink>
       </nav>
     </React.Fragment>

@@ -27,6 +27,21 @@ html {
   }
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #757575;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #ebf7fd;
+}
+
 *,
 *::after,
 *::before {
@@ -216,7 +231,7 @@ button:focus {
       -ms-flex-align: center;
           align-items: center;
   background-color: #1D1C20;
-  height: 37rem;
+  height: 40rem;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -338,6 +353,10 @@ button:focus {
           justify-content: center;
   min-height: 82vh;
   padding: 3rem;
+}
+
+.play .error {
+  color: orangered;
 }
 
 .play section {
@@ -468,7 +487,7 @@ button:focus {
 
 .game .input-container input {
   padding: .5rem 1rem;
-  background-color: #333333;
+  background-color: #222;
   color: #fefefe;
   border-radius: 5px;
   font-size: 1.5rem;
@@ -490,5 +509,89 @@ button:focus {
 .letter {
   padding: .2rem;
   font-size: 1.5rem;
+}
+
+.countdown {
+  font-family: "Nunito", sans-serif, serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 82vh;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.countdown section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem;
+  font-size: 3rem;
+}
+
+.countdown section div {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+.countdown section .red {
+  background-color: orangered;
+}
+
+.countdown section .orange {
+  background-color: #f2910a;
+}
+
+.countdown section .green {
+  background-color: #7bc74d;
+}
+
+.room {
+  font-family: "Nunito", sans-serif, serif;
+  min-height: 82vh;
+  padding: 3rem;
+}
+
+.room h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.room h1 span {
+  color: #ed8936;
+}
+
+.room h2 {
+  font-size: 2.5rem;
+}
+
+.room .player {
+  margin: .5rem 0;
+  font-size: 1.25rem;
+}
+
+.room .player i {
+  margin-right: .5rem;
+}
+
+.room button {
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  color: #212121;
+  font-weight: bold;
+  -webkit-transition: .2s all;
+  transition: .2s all;
 }
 /*# sourceMappingURL=index.css.map */

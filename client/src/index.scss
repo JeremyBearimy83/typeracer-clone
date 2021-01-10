@@ -23,6 +23,21 @@ html {
   }
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #757575;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #ebf7fd;
+}
+
 
 *,
 *::after,
@@ -78,6 +93,8 @@ button {
 @import "./styles/play";
 @import "./styles/home";
 @import "./styles/game";
+@import "./styles/room";
+
 
 
 

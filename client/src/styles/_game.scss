@@ -12,7 +12,7 @@
 
         input{
             padding: .5rem 1rem;
-            background-color: #333333;
+            background-color: #222;
             color: #fefefe;
             border-radius: 5px;
             font-size: 1.5rem;
@@ -38,4 +38,39 @@
 .letter{
     padding: .2rem;
     font-size: 1.5rem;
+}
+
+.countdown{
+    font-family: $font-family, sans-serif, serif;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 82vh;
+justify-content: center;
+
+section{
+    display: flex;
+    margin: 1rem;
+    font-size: 3rem;
+
+    div{
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        margin: 1rem;
+    }
+
+    .red{
+        background-color: orangered;
+    }
+    .orange{
+background-color: #f2910a;
+
+    }
+
+    .green{
+background-color: #7bc74d;
+
+    }
+}
 }

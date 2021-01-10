@@ -7,7 +7,6 @@ interface IProps {
 }
 
 const Divify: React.FC<IProps> = ({ textArr }: IProps) => {
-  console.log("Divify is called");
   return (
     <React.Fragment>
       <div style={{ display: "flex", flexWrap: "wrap" }}>

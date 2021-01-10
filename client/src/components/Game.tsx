@@ -7,6 +7,8 @@ import { Letter } from "../../types";
 const textString: string =
   "Synthetic emotions in the form of pills, psychological warfare in the form of advertising, mind-altering chemicals in the form of food, brainwashing seminars in the form of media, controlled isolated bubbles in the form of social networks.";
 
+// const textString: string = "Please work :)";
+
 //STORES AN ARRAY OF WORDS
 const wordsArr: string[] = textString.split(" ");
 
@@ -18,56 +20,73 @@ const textArr: Letter[] = textString
 export default function Game(): ReactElement {
   const [text, setText] = useState<Letter[]>(textArr);
   //THE INDEX I AM  CURRENTLY ON IN THE LETTER ARRAY
-  const [letterCount, setLetterCount] = useState<number>(1);
+  //const [letterCount, setLetterCount] = useState<number>(1);
 
   //THE INDEX I AM CURRENTLY ON IN THE WORD ARRAY
   const [wordCount, setWordCount] = useState<number>(0);
+
+  const [wordStartIndex, setWordStartIndex] = useState<number>(0);
 
   //CURRENT WORD BEING TYPED IN THE INPUT
   const [currentWord, setCurrentWord] = useState<any>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("This is called ");
+    console.log("HANDLE IN PUT CHANGE IN CALLED");
     setCurrentWord(event.target.value);
   };
 
   useEffect(() => {
-    if (text[letterCount].color === "grey")
-      setLetterCount((prev) => {
-        console.log("DEcrement is caleld");
-        return prev - 1;
+    setText((prevText) => {
+      console.log({ prevText });
+      // const n: number = wordStartIndex + wordsArr[wordCount].length;
+      // console.log({ n });
+      const newText = prevText.map((l: Letter, i: number) => {
+        if (i >= wordStartIndex && i < wordStartIndex + currentWord.length) {
+          const subString: string = wordsArr[wordCount].substr(
+            0,
+            i - wordStartIndex + 1
+          );
+          return {
+            ...l,
+            color:
+              subString === currentWord.substr(0, i - wordStartIndex + 1)
+                ? "green"
+                : "red",
+          };
+        } else if (i >= wordStartIndex) return { ...l, color: "grey" };
+        return l;
       });
-    else setLetterCount((prev) => prev + 1);
-  }, [text]);
+      return newText;
+    });
+  }, [currentWord]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Shift") return;
-    if (event.key === "Backspace") {
-      setText((prevText) => {
-        console.log("grey is called");
-        const newText = Object.assign([], prevText, {
-          [letterCount]: { ...text[letterCount], color: "grey" },
-        });
-        return newText;
-      });
-    } else if (event.key === text[letterCount].value) {
-      setText((prevText) => {
-        const newText = Object.assign([], prevText, {
-          [letterCount]: { ...text[letterCount], color: "green" },
-        });
-        return newText;
-      });
-    } else if (event.key !== text[letterCount].value) {
+    console.log(event.key);
+    if (event.key == " ") {
+      if (currentWord === wordsArr[wordCount]) {
+        setCurrentWord("");
+        setWordCount(wordCount + 1);
+        setWordStartIndex((prev) => prev + currentWord.length + 1);
+        event.preventDefault();
+      } else return;
+    }
+  };
+
+  useEffect(() => {
+    if (wordStartIndex > 0) {
       setText((prevText) => {
         const newText = Object.assign([], prevText, {
-          [letterCount]: { ...text[letterCount], color: "red" },
+          [wordStartIndex - 1]: {
+            ...prevText[wordStartIndex - 1],
+            color: "green",
+          },
         });
         return newText;
       });
     }
-  };
+  }, [wordStartIndex]);
 
-  console.log({ text });
+  //console.log({ text });
   return (
     <React.Fragment>
       <Divify textArr={text} />
@@ -82,14 +101,22 @@ export default function Game(): ReactElement {
   );
 }
 
-//SO HOW DO I WANT TO GO ABOUT THIS
-//SO I NEED AN ARRAY OF WORDS AS WELL NOT JUST LETTERS
-//I HAVE A LETTERS COUNTER
-//I HAVE A WORDS COUNTER
-//EVERYTIME I TYPE SOMETHING IN THE INPUT THE LETTERS COUNTER UPDATES DEPENDING
-//ON IF IT'S RIGHT OR NOT I TURN THE COLOR RED OR GREEN
-//CHECK FOR BACKSPACES
-//IF THE USER TYPES A SPACE I CHECK THE CURRENT WORD WITH THE WORD ARRAY
-//AND IF IT'S RIGHT INCREASE THE WORD COUNTER ELSE DO SOME RED BS
+//ACHA SO WHAT'S THE NEW PLAN
+//THE NEW PLAN IS WHEN THE CURRENT WORD CHANGES
+//I SHOULD SET ALL THE CURRENT CHARACTERS TO GREEN OR RED
 
-//EVERYTIME I TYPE SOMETHING I CHECK THE RESULT SO FAR WITH THE CURRENT WORD BEING CHECKED
+//FEW ISSUES TO BE RESOLVED RIGHT NOW:
+//TODO:
+//HANDLE ERRORS DUE TO PRESSING CHARACTERS LIKE SHIFT ALT CTRL ETC
+
+//EVERY TIME I HIT SPACE AND THE WORD TYPED IS CORRECT THE INPUT FIELD
+//SHOULD CLEAR
+
+//IF THE USER TYPES A WRONG CHARACTER CHARACTER TYPED FOLLOWING IT
+// SHOULD BE RED NOT MATTER WHAT IS TYPED
+//TEXTFIELD SHOULD ALSO BE RED
+
+//DRY RUN EVERYTHING AND INTEGRATE IT WITH AKHIL'S CODE PROPERLY
+
+// ANYTHING ELSE?
+//THAT'S IT FOR NOW I GUESS

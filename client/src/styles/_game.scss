@@ -1,0 +1,101 @@
+.game{
+    min-height: 82vh;
+    padding: 3rem;
+    font-family: $font-family, sans-serif, serif;
+
+    .input-container{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+
+
+
+        input{
+            padding: .5rem 1rem;
+            background-color: #222;
+            color: #fefefe;
+            border-radius: 5px;
+            font-size: 1.5rem;
+        }
+
+    }
+
+
+
+}
+
+
+.letter-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    min-width: 54rem;
+    margin: auto;
+    background-color: #1D1C20;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.letter{
+    padding: .2rem;
+    font-size: 1.5rem;
+}
+
+.countdown{
+    font-family: $font-family, sans-serif, serif;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 82vh;
+justify-content: center;
+
+section{
+    display: flex;
+    margin: 1rem;
+    font-size: 3rem;
+
+    div{
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        margin: 1rem;
+    }
+
+    .red{
+        background-color: orangered;
+    }
+    .orange{
+background-color: #f2910a;
+
+    }
+
+    .green{
+background-color: #7bc74d;
+
+    }
+}
+}
+
+.track{
+        width: 60%;
+        min-width: 54rem;
+        background:#333;
+        height:3px;
+        margin:1.5rem auto;
+        border-radius: 500px;
+        position: relative;
+
+
+        .car{
+            position: absolute;
+            top: -10px;
+        }
+
+
+        .completed-line{
+            position: absolute;
+            height: 100%;
+            border-radius: 500px;
+            opacity: .6;
+        }
+}

@@ -34,6 +34,7 @@ export default (socket: Socket, io: any) => {
     });
 
     room = await room.save();
+
     socket.join(room._id);
     io.to(room._id).emit("update-room", room, "room-created");
 
@@ -49,9 +50,9 @@ export default (socket: Socket, io: any) => {
       "username tag"
     );
 
-    if (room.players.length === 4) {
-      // EMIT GAME FULL EVENT
-    }
+    // if (room.players.length === 4) {
+    //   // EMIT GAME FULL EVENT
+    // }
 
     const user = await User.findById(userID).select("username tag");
 
@@ -78,15 +79,14 @@ export default (socket: Socket, io: any) => {
   // YEAH WE HAVE UNNCESSARY QUERIES WHAT TO DO
   socket.on("leave-room", async (userID: string, roomID: string) => {
     // OK TF IF I REMOVE userID IT BREAKS
-    let room = await Room.findOne({ _id: roomID }).populate(
+    let room = await Room.findById(roomID).populate(
       "players.user",
       "username tag"
     );
 
-    // $pull syntax is not working (Typescript :/)
-    // userAccounts.update(
-    //   { _id: roomID },
-    //   { $pull: { players : { _id : userID } } },
+    // let room = await Room.findByIdAndUpdate(roomID, {
+    //   $pull: { players: { _id: userID } },
+    // }).populate("players.user", "username tag");
 
     room.players = room.players.filter(
       (player: any) => player._id != socket.id
@@ -103,12 +103,37 @@ export default (socket: Socket, io: any) => {
     }
   });
 
+  // ERROR IDHAR
   socket.on("start-game", async (roomID: string) => {
     try {
-      const room = await Room.findOne({ _id: roomID });
+      let room = await Room.findById(roomID).populate(
+        "players.user",
+        "username tag"
+      );
+
       room.gameStarted = true;
+
+      room = await room.save();
+
+      io.to(room._id).emit("update-room", room);
+    } catch (err) {
+      throw err;
+    }
+  });
+
+  socket.on("word-typed", async (userID: string, roomID: string) => {
+    try {
+      const room = await Room.findById(roomID);
+
+      room.players = room.players.map((player: any) =>
+        player.user === userID
+          ? { ...player, currentWordIndex: player.currentWordIndex + 1 }
+          : player
+      );
+
       await room.save();
-      io.to(room._id).emit("update-room", room, "game-started");
+
+      io.to(room._id).emit("update-room", room);
     } catch (err) {
       throw err;
     }

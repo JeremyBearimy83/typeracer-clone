@@ -26,7 +26,7 @@ const playerSchema = new mongoose.Schema({
     validate: /^#(?:[0-9a-fA-F]{3}){1,2}$/,
     required: true,
   },
-  currentPercentage: {
+  currentWordIndex: {
     type: Number,
     default: 0,
   },
@@ -40,23 +40,26 @@ const playerSchema = new mongoose.Schema({
   },
 });
 
-const roomSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    default: shortid.generate,
-  },
-  paragraph: {
-    type: String,
-    required: true,
-  },
-  players: {
-    type: [playerSchema],
-    default: [],
-  },
-  gameStarted: {
-    type: Boolean,
-    default: false,
-  },
-});
+const roomSchema = new mongoose.Schema(
+  {
+    _id: {
+      type: String,
+      default: shortid.generate,
+    },
+    paragraph: {
+      type: String,
+      required: true,
+    },
+    players: {
+      type: [playerSchema],
+      default: [],
+    },
+    gameStarted: {
+      type: Boolean,
+      default: false,
+    },
+  }
+  // { versionKey: false }
+);
 
 export default mongoose.model<any>("Room", roomSchema);

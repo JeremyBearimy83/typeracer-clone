@@ -16,8 +16,7 @@ export interface Player {
     tag: number;
   };
   color: string;
-  currentPercentage: boolean;
-  finalPosition: number;
+  currentWordIndex: number;
   WPM: number;
 }
 

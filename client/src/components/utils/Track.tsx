@@ -5,14 +5,17 @@ interface Props {
   currentPercentage: number;
 }
 
-export default function Track({}): ReactElement {
+export default function Track({
+  color,
+  currentPercentage,
+}: Props): ReactElement {
   return (
     <div className="track">
-      <div style={{ color: "#00fff5", left: "10%" }} className="car">
+      <div style={{ color, left: `${currentPercentage}%` }} className="car">
         <i className="fas fa-car-side"></i>
       </div>
       <div
-        style={{ background: "#00fff5", width: "10%" }}
+        style={{ background: color, width: `${currentPercentage}%` }}
         className="completed-line"
       ></div>
     </div>

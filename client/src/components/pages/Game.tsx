@@ -23,6 +23,8 @@ export default function Game(): ReactElement {
 
   const game = useGame();
 
+  console.log(game);
+
   // const textString = game?.room?.paragraph;
 
   //STORES AN ARRAY OF WORDS
@@ -85,6 +87,7 @@ export default function Game(): ReactElement {
         setWordCount(wordCount + 1);
         setWordStartIndex((prev) => prev + currentWord.length + 1);
         event.preventDefault();
+        game?.incrementIndex();
       } else return;
     }
   };
@@ -110,10 +113,16 @@ export default function Game(): ReactElement {
   //console.log({ text });
   return started ? (
     <div className="game">
-      <Track />
-      <Track />
-      <Track />
-      <Track />
+      {game?.room?.players.map((player) => {
+        const currentPercentage =
+          (player.currentWordIndex / wordsArr.length) * 100;
+        console.log(player.currentWordIndex);
+
+        return (
+          <Track color={player.color} currentPercentage={currentPercentage} />
+        );
+      })}
+
       <Divify textArr={text} />
       <div className="input-container">
         <input

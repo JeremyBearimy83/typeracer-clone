@@ -15,6 +15,7 @@ interface Value {
   onUpdate: (func: (room: Room, event: string) => void) => void;
   startGame: () => void;
   cleanup: () => void;
+  incrementIndex: () => void;
 }
 
 const GameContext = React.createContext<Nullable<Value>>(null);
@@ -44,13 +45,6 @@ export default function GameProvider({ children }: Props): ReactElement {
 
   const createRoom = () => {
     socket.emit("create-room", "5ffd0ae29dab1d26e86e20f0");
-
-    // return new Promise((resolve, reject) => {
-    //   socket.on("room-created", (roomID: string) => {
-    //     if (roomID) resolve(roomID);
-    //     else reject(new Error("Bhai typing tere sei nahi hoga"));
-    //   });
-    // });
   };
 
   const joinRoom = (roomID: string) => {
@@ -59,13 +53,19 @@ export default function GameProvider({ children }: Props): ReactElement {
 
   const leaveRoom = () => {
     socket.emit("leave-room", "5ffd0ae29dab1d26e86e20f0", room?._id);
+    cleanup();
   };
 
   const startGame = () => {
     socket.emit("start-game", room?._id);
   };
+
   const cleanup = () => {
-    socket.removeAllListeners();
+    setRoom(null);
+  };
+
+  const incrementIndex = () => {
+    socket.emit("word-typed", room?._id);
   };
 
   const value = {
@@ -76,6 +76,7 @@ export default function GameProvider({ children }: Props): ReactElement {
     onUpdate,
     startGame,
     cleanup,
+    incrementIndex,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

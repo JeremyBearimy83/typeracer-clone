@@ -5,6 +5,7 @@ import Room from "./models/Room";
 import User from "./models/User";
 
 import colors from "./config/colors";
+import getParagraph from "./config/paragraph";
 
 const paragraph =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam iusto excepturi aperiam voluptatum eveniet quod fuga consequuntur tempora commodi ut cum ad unde officiis, modi provident rem nam ratione beatae?";
@@ -22,6 +23,8 @@ export default (socket: Socket, io: any) => {
   socket.on("create-room", async (userID: string) => {
     const user = await User.findById(userID).select("username tag");
 
+    const paragraph = await getParagraph();
+
     const player = {
       _id: socket.id,
       isPartyLeader: true,
@@ -30,8 +33,8 @@ export default (socket: Socket, io: any) => {
     };
 
     let room = await new Room({
-      paragraph,
       players: [player],
+      paragraph,
     }).save();
 
     socket.join(room._id);

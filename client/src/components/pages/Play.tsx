@@ -2,22 +2,28 @@ import React, { ReactElement, useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useGame } from "../../context/GameContext";
 
+import { DualRing } from "react-spinners-css";
+
 export default function Play({ match }: any): ReactElement {
   const history = useHistory();
 
   const game = useGame();
 
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   game?.onUpdate((room, event) => {
-    if (event === "room-created" || event === "room-joined")
+    if (event === "room-created" || event === "room-joined") {
+      setLoading(false);
       history.push(`/room/${room._id}`);
+    }
   });
 
   const handleCreate = () => {
     game?.createRoom();
+    setLoading(true);
   };
 
   const handleJoin = () => {
@@ -40,8 +46,16 @@ export default function Play({ match }: any): ReactElement {
   return (
     <div className="play">
       <section>
-        <h1>Create a Room</h1>
-        <button onClick={handleCreate}>Create</button>
+        {loading ? (
+          <div className="loading">
+            <DualRing size={140} />
+          </div>
+        ) : (
+          <>
+            <h1>Create a Room</h1>
+            <button onClick={handleCreate}>Create</button>
+          </>
+        )}
       </section>
       <section>
         <h1>Join a Room</h1>

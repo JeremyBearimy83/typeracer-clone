@@ -15,7 +15,7 @@ interface Value {
   onUpdate: (func: (room: Room, event: string) => void) => void;
   startGame: () => void;
   cleanup: () => void;
-  incrementIndex: () => void;
+  incrementPlayerIndex: () => void;
 }
 
 const GameContext = React.createContext<Nullable<Value>>(null);
@@ -64,7 +64,7 @@ export default function GameProvider({ children }: Props): ReactElement {
     setRoom(null);
   };
 
-  const incrementIndex = () => {
+  const incrementPlayerIndex = () => {
     socket.emit("word-typed", room?._id);
   };
 
@@ -76,7 +76,7 @@ export default function GameProvider({ children }: Props): ReactElement {
     onUpdate,
     startGame,
     cleanup,
-    incrementIndex,
+    incrementPlayerIndex,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

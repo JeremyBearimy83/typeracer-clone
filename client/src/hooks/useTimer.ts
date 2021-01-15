@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function useTimer() {
+export default function useTimer(): [() => void, () => number] {
   const time = useRef(0);
   const timer = useRef<any>();
 
@@ -10,7 +10,7 @@ export default function useTimer() {
     }, 1000);
   };
 
-  const stopTimer = () => {
+  const stopTimer = (): number => {
     clearInterval(timer.current);
     return time.current;
   };

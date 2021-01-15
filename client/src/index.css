@@ -380,6 +380,21 @@ button:focus {
           justify-content: space-between;
 }
 
+.play section .loading {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: translate(1rem, 1rem);
+          transform: translate(1rem, 1rem);
+}
+
 .play section input {
   background-color: #333;
   padding: .5rem .25rem;
@@ -570,6 +585,8 @@ button:focus {
 .track .car {
   position: absolute;
   top: -10px;
+  -webkit-transition: 1s all;
+  transition: 1s all;
 }
 
 .track .completed-line {

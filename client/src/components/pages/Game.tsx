@@ -6,6 +6,7 @@ import Track from "../utils/Track";
 import { Letter } from "../../utils/types";
 import { useLocation } from "react-router-dom";
 import { useGame } from "../../context/GameContext";
+import useTimer from "../../hooks/useTimer";
 
 // const textString: string =
 //   "Synthetic emotions in the form of pills, psychological warfare in the form of advertising, mind-altering chemicals in the form of food, brainwashing seminars in the form of media, controlled isolated bubbles in the form of social networks.";
@@ -23,9 +24,7 @@ export default function Game(): ReactElement {
 
   const game = useGame();
 
-  console.log(game);
-
-  // const textString = game?.room?.paragraph;
+  const [startTimer, stopTimer] = useTimer();
 
   //STORES AN ARRAY OF WORDS
   const wordsArr: string[] = textString.split(" ");
@@ -50,7 +49,10 @@ export default function Game(): ReactElement {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("HANDLE IN PUT CHANGE IN CALLED");
+    if (wordCount === 0) {
+      startTimer();
+    }
+
     setCurrentWord(event.target.value);
   };
 
@@ -87,7 +89,13 @@ export default function Game(): ReactElement {
         setWordCount(wordCount + 1);
         setWordStartIndex((prev) => prev + currentWord.length + 1);
         event.preventDefault();
-        game?.incrementIndex();
+        game?.incrementPlayerIndex();
+
+        if (wordCount === wordsArr.length - 1) {
+          const time = stopTimer();
+          const WPM = wordsArr.length / (time / 60);
+          console.log(time);
+        }
       } else return;
     }
   };
@@ -116,8 +124,6 @@ export default function Game(): ReactElement {
       {game?.room?.players.map((player) => {
         const currentPercentage =
           (player.currentWordIndex / wordsArr.length) * 100;
-        console.log(player.currentWordIndex);
-
         return (
           <Track color={player.color} currentPercentage={currentPercentage} />
         );

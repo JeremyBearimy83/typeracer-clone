@@ -30,10 +30,6 @@ const playerSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  finalPosition: {
-    type: Number,
-    default: -1,
-  },
   WPM: {
     type: Number,
     default: -1,

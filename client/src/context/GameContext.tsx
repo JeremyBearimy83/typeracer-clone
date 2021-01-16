@@ -43,7 +43,7 @@ export default function GameProvider({ children }: Props): ReactElement {
   };
 
   const createRoom = () => {
-    socket.emit("create-room", "5ffd0ae29dab1d26e86e20f0");
+    socket.emit("create-room", "6001b55c69328f33816c37f7");
 
     // return new Promise((resolve, reject) => {
     //   socket.on("room-created", (roomID: string) => {
@@ -54,11 +54,11 @@ export default function GameProvider({ children }: Props): ReactElement {
   };
 
   const joinRoom = (roomID: string) => {
-    socket.emit("join-room", "5ffd0ae29dab1d26e86e20f0", roomID);
+    socket.emit("join-room", "6001b55c69328f33816c37f7", roomID);
   };
 
   const leaveRoom = () => {
-    socket.emit("leave-room", "5ffd0ae29dab1d26e86e20f0", room?._id);
+    socket.emit("leave-room", "6001b55c69328f33816c37f7", room?._id);
   };
 
   const startGame = () => {

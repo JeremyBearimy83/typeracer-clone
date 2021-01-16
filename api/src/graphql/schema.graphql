@@ -1,5 +1,6 @@
 type Query {
   greeting: String!
+  greetingAnonymous: Response
 }
 
 type Mutation {

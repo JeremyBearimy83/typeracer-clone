@@ -9,6 +9,14 @@ import User from "../models/User";
 //   username: String;
 // }
 
+export const greetingAnonymous = (
+  parent: undefined,
+  args: undefined,
+  { res }: any
+) => {
+  return res.json({ message: "Hello Anonymous, I am dad.", success: true });
+};
+
 export const greeting = async (parent: any, args: any, { req }: any) => {
   const token = req.header("auth-token");
   console.log(token);

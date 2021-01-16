@@ -94,6 +94,8 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
           }
     }`;
 
+    //GRAPHQL LOGIC
+
     fetch("http://localhost:8000/graphql", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -179,6 +181,8 @@ function Register({ switchPage }: { switchPage: () => void }): ReactElement {
       resetConfirmPass();
       setErrors(errors);
     }
+
+    //GRAPHQL LOGIC
 
     const query = `mutation ($email: String!, $pass: String!, $username: String!) {
       userSignUp(username:$username, password: $pass, email:$email)

@@ -1,14 +1,13 @@
 type Query {
-   greeting: String!
+  greeting: String!
 }
 
-type Mutation{
-   userSignUp(username:String,email:String,password:String):Response
-   userLogIn(email:String,password:String):String
+type Mutation {
+  userSignUp(username: String, email: String, password: String): Response
+  userLogIn(email: String, password: String): Response
 }
 
-type Response{
-   message:String
-   success:Boolean
+type Response {
+  message: String
+  success: Boolean
 }
-

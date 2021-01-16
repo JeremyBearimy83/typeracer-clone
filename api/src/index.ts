@@ -20,7 +20,13 @@ const typeDefs = gql(
   })
 );
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req, res }) => {
+    return { req, res };
+  },
+});
 
 const app = express();
 dotenv.config();

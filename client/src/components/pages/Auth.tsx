@@ -1,6 +1,14 @@
-import React, { ReactElement, useState, FormEvent } from "react";
+import React, { ReactElement, useState, FormEvent, useEffect } from "react";
 
 import useInputState from "../../hooks/useInputState";
+
+import { gql, useQuery } from "@apollo/client";
+
+// const TEST_QUERY = gql`
+//   {
+//     greetingAnonymous
+//   }
+// `;
 
 interface Props {}
 
@@ -10,11 +18,36 @@ const validateEmail = (email: string) => {
 };
 
 export default function Auth({}: Props): ReactElement {
+  useEffect(() => {
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `
+        query {
+          greetingAnonymous
+          {
+           message
+            success
+          }
+        }`,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => console.log({ err }))
+      .then((res) => {
+        console.log({ res });
+      });
+  }, []);
   const [login, setLogin] = useState(true);
 
   const switchPage = () => {
     setLogin((prev) => !prev);
   };
+
+  // const everything: any = useQuery(TEST_QUERY);
 
   return (
     <div className="auth">
@@ -32,6 +65,8 @@ export default function Auth({}: Props): ReactElement {
 function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
   const [errors, setErrors] = useState<string[]>([]);
 
+  const [authToken, setAuthToken] = useState("");
+
   const [email, setEmail, resetEmail] = useInputState();
   const [pass, setPass, resetPass] = useInputState();
 
@@ -48,10 +83,61 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
       resetPass();
       setErrors(errors);
     }
+
+    const query = `mutation ($email: String!, $pass: String!) {
+      userLogIn(email:$email, password: $pass)
+          {
+            message,
+            success
+          }
+    }`;
+
+    //GRAPHQL LOGIC
+
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: query,
+        variables: { email, pass },
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log({ err }))
+      .then((res) => {
+        console.log(res.message);
+        if (res.success) setAuthToken(res.message);
+      });
+  };
+
+  const query2 = `query{
+    greeting
+        {
+          message,
+          success
+        }
+  }`;
+
+  const loginChecker = () => {
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "auth-token": authToken },
+      body: JSON.stringify({
+        query: query2,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => console.log({ err }))
+      .then((res) => {
+        console.log({ res });
+      });
   };
 
   return (
     <React.Fragment>
+      <button onClick={loginChecker}>Are you logged in</button>
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         {errors.map((err) => {
@@ -119,6 +205,30 @@ function Register({ switchPage }: { switchPage: () => void }): ReactElement {
       resetConfirmPass();
       setErrors(errors);
     }
+
+    //GRAPHQL LOGIC
+
+    const query = `mutation ($email: String!, $pass: String!, $username: String!) {
+      userSignUp(username:$username, password: $pass, email:$email)
+          {
+            message,
+            success
+          }
+    }`;
+
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: query,
+        variables: { email, pass, username },
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log({ err }))
+      .then((res) => {
+        console.log({ res });
+      });
   };
 
   return (

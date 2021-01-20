@@ -1,8 +1,14 @@
-import { userLogIn, userSignUp } from "../controllers/auth";
+import {
+  userLogIn,
+  userSignUp,
+  greeting,
+  greetingAnonymous,
+} from "../controllers/auth";
 
 export default {
   Query: {
-    greeting: () => "Hello World",
+    greeting,
+    greetingAnonymous,
   },
   Mutation: {
     userSignUp,

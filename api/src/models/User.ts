@@ -1,4 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
+
+interface IUser {
+  username: string;
+  password: string;
+  email: string;
+}
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -18,8 +24,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength: 8,
-    select: false,
+    // select: false, WHY DID YOU DO THIS? TOOK ME 2HRS TO FIGURE OUT F
   },
 });
 
-export default mongoose.model("User", userSchema);
+export default mongoose.model<IUser & Document>("User", userSchema);

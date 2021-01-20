@@ -15,7 +15,6 @@ interface Value {
   onUpdate: (func: (room: Room, event: string) => void) => void;
   startGame: () => void;
   cleanup: () => void;
-  incrementPlayerIndex: () => void;
 }
 
 const GameContext = React.createContext<Nullable<Value>>(null);
@@ -44,8 +43,7 @@ export default function GameProvider({ children }: Props): ReactElement {
   };
 
   const createRoom = () => {
-<<<<<<< HEAD
-    socket.emit("create-room", "6001b55c69328f33816c37f7");
+    socket.emit("create-room", "6001e7df5bc6cc63f95d0bbe");
 
     // return new Promise((resolve, reject) => {
     //   socket.on("room-created", (roomID: string) => {
@@ -53,34 +51,21 @@ export default function GameProvider({ children }: Props): ReactElement {
     //     else reject(new Error("Bhai typing tere sei nahi hoga"));
     //   });
     // });
-=======
-    socket.emit("create-room", "5ffd0ae29dab1d26e86e20f0");
->>>>>>> d213fdb40c033625b1b07d6acd2be35719d39324
   };
 
   const joinRoom = (roomID: string) => {
-    socket.emit("join-room", "6001b55c69328f33816c37f7", roomID);
+    socket.emit("join-room", "6001e7df5bc6cc63f95d0bbe", roomID);
   };
 
   const leaveRoom = () => {
-<<<<<<< HEAD
-    socket.emit("leave-room", "6001b55c69328f33816c37f7", room?._id);
-=======
-    socket.emit("leave-room", "5ffd0ae29dab1d26e86e20f0", room?._id);
-    cleanup();
->>>>>>> d213fdb40c033625b1b07d6acd2be35719d39324
+    socket.emit("leave-room", "6001e7df5bc6cc63f95d0bbe", room?._id);
   };
 
   const startGame = () => {
     socket.emit("start-game", room?._id);
   };
-
   const cleanup = () => {
-    setRoom(null);
-  };
-
-  const incrementPlayerIndex = () => {
-    socket.emit("word-typed", room?._id);
+    socket.removeAllListeners();
   };
 
   const value = {
@@ -91,7 +76,6 @@ export default function GameProvider({ children }: Props): ReactElement {
     onUpdate,
     startGame,
     cleanup,
-    incrementPlayerIndex,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

@@ -12,12 +12,12 @@ export default function Room({ match }: any): ReactElement {
   const players = game?.room?.players;
 
   useEffect(() => {
-    if (!game?.room?.gameStarted) {
-      return game?.leaveRoom;
-    }
+    // if (!game?.room?.gameStarted) {
+    //   return game?.leaveRoom;
+    // }
   }, []);
 
-  game?.onUpdate((room, event) => {
+  game?.onUpdate((room) => {
     if (room.gameStarted) {
       history.push({
         pathname: `${match.url}/game`,
@@ -32,8 +32,6 @@ export default function Room({ match }: any): ReactElement {
   };
 
   const handleStart = () => {
-    //DO SOCKET WALA LOGIC
-    // GET A PARAGRAH
     game?.startGame();
   };
 
@@ -43,7 +41,6 @@ export default function Room({ match }: any): ReactElement {
         Room ID: <span> {game?.room?._id}</span>{" "}
         <LeaveButton handleLeave={handleLeave} />
       </h1>
-
       <h2>Players</h2>
       {players?.map((player: Player) => (
         <div className="player">
@@ -55,7 +52,6 @@ export default function Room({ match }: any): ReactElement {
           {player.user.username} #{player.user.tag}
         </div>
       ))}
-
       <button onClick={handleStart} disabled={players && players.length < 2}>
         Start
       </button>

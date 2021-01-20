@@ -48,7 +48,7 @@ html {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -57,7 +57,8 @@ body {
   overflow-x: hidden;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: inherit;
   text-decoration: none;
 }
@@ -98,12 +99,12 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: .5rem 1rem;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
 }
 
 .header .left {
@@ -111,8 +112,8 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -120,7 +121,7 @@ button:focus {
 .header .left img {
   width: 3rem;
   height: 3rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .header .right {
@@ -128,12 +129,12 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .header .right .player span {
-  margin: 0 .25rem;
+  margin: 0 0.25rem;
   color: #ed8936;
 }
 
@@ -142,12 +143,12 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: #fefefe;
   background-color: #313237;
-  margin: 0 .5rem;
-  padding: .25rem .5rem;
+  margin: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .header .right button:hover {
@@ -155,7 +156,7 @@ button:focus {
 }
 
 .header .right button i {
-  margin-right: .25rem;
+  margin-right: 0.25rem;
 }
 
 .nav {
@@ -174,9 +175,9 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 .5rem;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 0.5rem;
 }
 
 .nav a:hover {
@@ -184,15 +185,15 @@ button:focus {
 }
 
 .nav a i {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .nav a:nth-child(1) i {
-  color: #37D399;
+  color: #37d399;
 }
 
 .nav a:nth-child(2) i {
-  color: #EC4899;
+  color: #ec4899;
 }
 
 .nav .link-active {
@@ -205,11 +206,11 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   min-height: 82vh;
   padding: 3rem;
 }
@@ -225,12 +226,12 @@ button:focus {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #1D1C20;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #1d1c20;
   height: 40rem;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -257,18 +258,18 @@ button:focus {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .auth main form button {
-  padding: .25rem;
+  padding: 0.25rem;
   background-color: #303033;
   color: #fefefe;
   font-size: 1.1rem;
-  -webkit-transition: .2s all;
-  transition: .2s all;
-  margin: .5rem 0;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+  margin: 0.5rem 0;
 }
 
 .auth main form button:hover {
@@ -281,20 +282,20 @@ button:focus {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin: 1rem 0;
 }
 
 .auth main form input {
-  margin: .25rem 0;
+  margin: 0.25rem 0;
   font-size: 1.25rem;
   color: #fefefe;
   background-color: inherit;
   border-bottom: 1px solid #fefefe;
-  padding-bottom: .25rem;
-  -webkit-transition: .2s all;
-  transition: .2s all;
+  padding-bottom: 0.25rem;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .auth main form input:focus {
@@ -304,36 +305,36 @@ button:focus {
 .auth main form .outh {
   cursor: pointer;
   margin: 1rem 0;
-  padding: .35rem;
+  padding: 0.35rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 1.1rem;
   background-color: inherit;
   color: #fefefe;
-  -webkit-transition: .2s all;
-  transition: .2s all;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .auth main form .outh--google {
-  border-left: 2px solid #F77171;
+  border-left: 2px solid #f77171;
 }
 
 .auth main form .outh--google i {
-  color: #F77171;
+  color: #f77171;
 }
 
 .auth main form .outh--discord {
-  border-left: 2px solid #A5B4FC;
+  border-left: 2px solid #a5b4fc;
 }
 
 .auth main form .outh--discord i {
-  color: #A5B4FC;
+  color: #a5b4fc;
 }
 
 .auth main form .outh:hover {
@@ -346,11 +347,11 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   min-height: 82vh;
   padding: 3rem;
 }
@@ -360,7 +361,7 @@ button:focus {
 }
 
 .play section {
-  background-color: #1D1C20;
+  background-color: #1d1c20;
   height: 15rem;
   width: 15rem;
   margin: 0 3rem;
@@ -370,31 +371,46 @@ button:focus {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.play section .loading {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-transform: translate(1rem, 1rem);
+  transform: translate(1rem, 1rem);
 }
 
 .play section input {
   background-color: #333;
-  padding: .5rem .25rem;
+  padding: 0.5rem 0.25rem;
   color: #fefefe;
   font-size: 1.25rem;
   width: 70%;
 }
 
 .play section button {
-  padding: .35rem 1rem;
+  padding: 0.35rem 1rem;
   background-color: #303033;
   color: #fefefe;
   font-size: 1.25rem;
-  -webkit-transition: .2s all;
-  transition: .2s all;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .play section button:hover {
@@ -412,14 +428,14 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .home aside {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .home aside img {
@@ -432,15 +448,15 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .home aside h1 {
@@ -459,14 +475,14 @@ button:focus {
   background-color: #ed8936;
   color: #fff;
   font-weight: bold;
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 5px;
   font-size: 1.5rem;
 }
 
 .home aside button:hover {
   -webkit-box-shadow: 0 0 15px rgba(237, 137, 54, 0.75);
-          box-shadow: 0 0 15px rgba(237, 137, 54, 0.75);
+  box-shadow: 0 0 15px rgba(237, 137, 54, 0.75);
 }
 
 .game {
@@ -481,12 +497,12 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .game .input-container input {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   background-color: #222;
   color: #fefefe;
   border-radius: 5px;
@@ -498,17 +514,17 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 60%;
   min-width: 54rem;
   margin: auto;
-  background-color: #1D1C20;
+  background-color: #1d1c20;
   padding: 1rem 2rem;
   border-radius: 10px;
 }
 
 .letter {
-  padding: .2rem;
+  padding: 0.2rem;
   font-size: 1.5rem;
 }
 
@@ -519,15 +535,15 @@ button:focus {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   min-height: 82vh;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .countdown section {
@@ -570,13 +586,15 @@ button:focus {
 .track .car {
   position: absolute;
   top: -10px;
+  -webkit-transition: 1s all;
+  transition: 1s all;
 }
 
 .track .completed-line {
   position: absolute;
   height: 100%;
   border-radius: 500px;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .room {
@@ -592,23 +610,23 @@ button:focus {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .room h1 span {
   color: #ed8936;
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
 }
 
 .room h1 .leave {
   font-size: 1rem;
-  margin-left: .75rem;
+  margin-left: 0.75rem;
   cursor: pointer;
 }
 
 .room h1 .leave i {
-  margin-left: .25rem;
+  margin-left: 0.25rem;
 }
 
 .room h2 {
@@ -616,23 +634,23 @@ button:focus {
 }
 
 .room .player {
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   font-size: 1.25rem;
 }
 
 .room .player i {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .room button {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1.25rem;
   margin-top: 2rem;
   border-radius: 5px;
   color: #212121;
   font-weight: bold;
-  -webkit-transition: .2s all;
-  transition: .2s all;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .room button:disabled {

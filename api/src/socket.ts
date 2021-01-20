@@ -1,9 +1,11 @@
+// @ts-nocheck
 import { Socket } from "socket.io";
 
 import Room from "./models/Room";
 import User from "./models/User";
 
 import colors from "./config/colors";
+import getParagraph from "./config/paragraph";
 
 const paragraph =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam iusto excepturi aperiam voluptatum eveniet quod fuga consequuntur tempora commodi ut cum ad unde officiis, modi provident rem nam ratione beatae?";
@@ -21,6 +23,8 @@ export default (socket: Socket, io: any) => {
   socket.on("create-room", async (userID: string) => {
     const user = await User.findById(userID).select("username tag");
 
+    const paragraph = await getParagraph();
+
     const player = {
       _id: socket.id,
       isPartyLeader: true,
@@ -28,12 +32,11 @@ export default (socket: Socket, io: any) => {
       color: colors[0],
     };
 
-    let room = new Room({
-      paragraph,
+    let room = await new Room({
       players: [player],
-    });
+      paragraph,
+    }).save();
 
-    room = await room.save();
     socket.join(room._id);
     io.to(room._id).emit("update-room", room, "room-created");
 
@@ -44,12 +47,9 @@ export default (socket: Socket, io: any) => {
   });
 
   socket.on("join-room", async (userID: string, roomID: string) => {
-    let room = await Room.findById(roomID).populate(
-      "players.user",
-      "username tag"
-    );
+    const { players } = await Room.findById(roomID);
 
-    if (room.players.length === 4) {
+    if (players.length === 4) {
       // EMIT GAME FULL EVENT
     }
 
@@ -59,12 +59,16 @@ export default (socket: Socket, io: any) => {
       _id: socket.id,
       isPartyLeader: false,
       user,
-      color: colors[room.players.length],
+      color: colors[players.length],
     };
 
-    room.players.push(player);
-
-    room = await room.save();
+    let room = await Room.findByIdAndUpdate(
+      roomID,
+      {
+        $push: { players: player },
+      },
+      { new: true, upsert: true, useFindAndModify: false }
+    ).populate("players.user", "username tag");
 
     socket.join(room._id);
     io.to(room._id).emit("update-room", room, "room-joined");
@@ -75,24 +79,15 @@ export default (socket: Socket, io: any) => {
     }
   });
 
-  // YEAH WE HAVE UNNCESSARY QUERIES WHAT TO DO
+  // THIS BROKE
   socket.on("leave-room", async (userID: string, roomID: string) => {
-    // OK TF IF I REMOVE userID IT BREAKS
-    let room = await Room.findOne({ _id: roomID }).populate(
-      "players.user",
-      "username tag"
-    );
-
-    // $pull syntax is not working (Typescript :/)
-    // userAccounts.update(
-    //   { _id: roomID },
-    //   { $pull: { players : { _id : userID } } },
-
-    room.players = room.players.filter(
-      (player: any) => player._id != socket.id
-    );
-
-    room = await room.save();
+    let room = await Room.findByIdAndUpdate(
+      roomID,
+      {
+        $pull: { players: { _id: socket.id } },
+      },
+      { useFindAndModify: false, new: true }
+    ).populate("players.user", "username tag");
 
     io.to(room._id).emit("update-room", room);
     socket.leave(room._id);
@@ -103,12 +98,35 @@ export default (socket: Socket, io: any) => {
     }
   });
 
+  // ERROR IDHAR
   socket.on("start-game", async (roomID: string) => {
     try {
-      const room = await Room.findOne({ _id: roomID });
-      room.gameStarted = true;
-      await room.save();
-      io.to(room._id).emit("update-room", room, "game-started");
+      let room = await Room.findByIdAndUpdate(
+        roomID,
+        {
+          gameStarted: true,
+        },
+        { useFindAndModify: false, new: true }
+      ).populate("players.user", "username tag");
+
+      io.to(room._id).emit("update-room", room);
+    } catch (err) {
+      throw err;
+    }
+  });
+
+  socket.on("word-typed", async (roomID: string) => {
+    try {
+      const room = await Room.findOneAndUpdate(
+        {
+          _id: roomID,
+          "players._id": socket.id,
+        },
+        { $inc: { "players.$.currentWordIndex": 1 } },
+        { useFindAndModify: false, new: true }
+      ).populate("players.user", "username tag");
+
+      io.to(room._id).emit("update-room", room);
     } catch (err) {
       throw err;
     }

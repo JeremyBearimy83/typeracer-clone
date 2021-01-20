@@ -28,6 +28,8 @@ const server = new ApolloServer({
   },
 });
 
+// const corsOptions = { allowedHeaders: ["auth-token"] };
+
 const app = express();
 dotenv.config();
 app.use(cors());

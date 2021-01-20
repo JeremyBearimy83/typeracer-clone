@@ -43,7 +43,7 @@ export default function GameProvider({ children }: Props): ReactElement {
   };
 
   const createRoom = () => {
-    socket.emit("create-room", "5ffd0ae29dab1d26e86e20f0");
+    socket.emit("create-room", "6001e7df5bc6cc63f95d0bbe");
 
     // return new Promise((resolve, reject) => {
     //   socket.on("room-created", (roomID: string) => {
@@ -54,11 +54,11 @@ export default function GameProvider({ children }: Props): ReactElement {
   };
 
   const joinRoom = (roomID: string) => {
-    socket.emit("join-room", "5ffd0ae29dab1d26e86e20f0", roomID);
+    socket.emit("join-room", "6001e7df5bc6cc63f95d0bbe", roomID);
   };
 
   const leaveRoom = () => {
-    socket.emit("leave-room", "5ffd0ae29dab1d26e86e20f0", room?._id);
+    socket.emit("leave-room", "6001e7df5bc6cc63f95d0bbe", room?._id);
   };
 
   const startGame = () => {
@@ -80,3 +80,11 @@ export default function GameProvider({ children }: Props): ReactElement {
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
+
+//WHAT CAN I DO
+//I HAVE ABOUT ONE AND A HALF HOUR BEFORE LUNCH
+//HOW DO I USE THAT PRODUCTIVELY
+//FINE I WILL DO THAT DP PLAYLIST
+//YOU SURE??
+//YEA I HAVE NO OTHER CHOICE ALSO
+//COOL THEN UP TO YOU

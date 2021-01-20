@@ -4,11 +4,11 @@ import useInputState from "../../hooks/useInputState";
 
 import { gql, useQuery } from "@apollo/client";
 
-const TEST_QUERY = gql`
-  {
-    greetingAnonymous
-  }
-`;
+// const TEST_QUERY = gql`
+//   {
+//     greetingAnonymous
+//   }
+// `;
 
 interface Props {}
 
@@ -33,10 +33,11 @@ export default function Auth({}: Props): ReactElement {
         }`,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .catch((err) => console.log({ err }))
       .then((res) => {
-        console.log("REacherd here");
         console.log({ res });
       });
   }, []);
@@ -46,13 +47,10 @@ export default function Auth({}: Props): ReactElement {
     setLogin((prev) => !prev);
   };
 
-  const everything: any = useQuery(TEST_QUERY);
-
-  console.log(everything);
+  // const everything: any = useQuery(TEST_QUERY);
 
   return (
     <div className="auth">
-      {`${everything.data}`}
       <main>
         {login ? (
           <SignIn switchPage={switchPage} />
@@ -107,13 +105,39 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
       .then((res) => res.json())
       .catch((err) => console.log({ err }))
       .then((res) => {
-        console.log("REacherd here");
+        console.log(res.message);
+        if (res.success) setAuthToken(res.message);
+      });
+  };
+
+  const query2 = `query{
+    greeting
+        {
+          message,
+          success
+        }
+  }`;
+
+  const loginChecker = () => {
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "auth-token": authToken },
+      body: JSON.stringify({
+        query: query2,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => console.log({ err }))
+      .then((res) => {
         console.log({ res });
       });
   };
 
   return (
     <React.Fragment>
+      <button onClick={loginChecker}>Are you logged in</button>
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         {errors.map((err) => {
@@ -203,7 +227,6 @@ function Register({ switchPage }: { switchPage: () => void }): ReactElement {
       .then((res) => res.json())
       .catch((err) => console.log({ err }))
       .then((res) => {
-        console.log("REacherd here");
         console.log({ res });
       });
   };

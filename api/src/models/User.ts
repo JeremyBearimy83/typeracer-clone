@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength: 8,
-    select: false,
+    // select: false, WHY DID YOU DO THIS? TOOK ME 2HRS TO FIGURE OUT F
   },
 });
 

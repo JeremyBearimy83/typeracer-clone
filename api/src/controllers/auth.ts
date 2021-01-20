@@ -14,21 +14,21 @@ export const greetingAnonymous = (
   args: undefined,
   { res }: any
 ) => {
-  return res.json({ message: "Hello Anonymous, I am dad.", success: true });
+  return { message: "Hello Anonymous, I am dad.", success: true };
 };
 
 export const greeting = async (parent: any, args: any, { req }: any) => {
   const token = req.header("auth-token");
   console.log(token);
-  if (!token) return "You are not logged in";
+  if (!token) return { message: "You are not logged in", success: false };
 
   try {
     const verified: any = jwt.verify(token, "lolbruhwhythough");
     const user: any = await User.findById(verified._id);
     console.log(verified);
-    return `Hello ${user.username} `;
+    return { message: `Hello ${user.username} `, success: true };
   } catch (err) {
-    return "You shall not pass";
+    return { message: "There is an importer among us", success: true };
   }
 };
 
@@ -84,10 +84,34 @@ export const userLogIn = async (
   if (!user) {
     return { message: "Does not exist", success: false };
   }
+  console.log(user);
+  console.log(user.email);
+  console.log(password);
+  console.log(user.password);
 
   //CHECK IF PASSWORD IS CORRECT
-  const validPassword = bcrypt.compare(password, user.password);
-  if (!validPassword) return { message: "Invalid password", success: false };
+  try {
+    const validPassword = await bcrypt.compare(password, user.password);
+    console.log({ validPassword });
+    if (!validPassword) return { message: "Invalid password", success: false };
+  } catch (e) {
+    // console.log(e);
+    return { message: "Another erroryaay", success: false };
+  }
+
+  // bcrypt.compare(req.body.password, user.password, function (err, res) {
+  //   console.log(err);
+  //   console.log(res);
+  //   if (err) {
+  //     return { success: false, message: "Another erryr :{" };
+  //   }
+  //   if (res) {
+  //     return { success: true, message: "finally" };
+  //   } else {
+  //     // response is OutgoingMessage object that server response http request
+  //     return { success: false, message: "passwords do not match" };
+  //   }
+  // });
 
   // const check = await bcrypt.compare(password, user.password);
 
@@ -102,8 +126,8 @@ export const userLogIn = async (
   const token = jwt.sign({ _id: user._id }, process.env.SECRET, {
     expiresIn: "1d",
   });
-  res.header("auth-token", token).send({ message: token, success: true });
-  console.log(res);
+  // res.header("auth-token", token).send({ message: token, success: true });
+  res.send({ message: token, success: true });
 
   //   const token = jwt.sign(
   //     { id: user._id, name: user.name, email: user.email },

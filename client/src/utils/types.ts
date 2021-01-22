@@ -5,7 +5,11 @@ export interface Letter {
   color: string;
 }
 
-export interface User {}
+export interface IUser {
+  username: string;
+  authToken: string;
+  id: string;
+}
 
 export interface Player {
   _id: string;

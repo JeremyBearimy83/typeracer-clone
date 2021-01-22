@@ -3,9 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 
 import logo from "../../assets/logo.png";
 
+import { useAuth } from "../../context/AuthContext";
+import { IUser, Nullable } from "../../utils/types";
+
 interface Props {}
 
 export default function Header(): ReactElement {
+  //USER IS THE USER FROM THE AUTHCONTEXT
+  const User = useAuth()?.currentUser;
   return (
     <React.Fragment>
       <div className="header">
@@ -16,7 +21,7 @@ export default function Header(): ReactElement {
         <div className="right">
           <div className="player">
             <i className="fas fa-user"></i>
-            <span>Guest</span>
+            <span>{User ? `${User.username}` : `Guest`}</span>
             {/* #1337 */}
           </div>
           <Link to="/auth">

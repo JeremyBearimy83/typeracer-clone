@@ -2,7 +2,12 @@ import React, { ReactElement, useState, FormEvent, useEffect } from "react";
 
 import useInputState from "../../hooks/useInputState";
 
+import { useAuth } from "../../context/AuthContext";
+
+import { IUser } from "../../utils/types";
+
 import { gql, useQuery } from "@apollo/client";
+import Snackbar from "../utils/Snackbar";
 
 // const TEST_QUERY = gql`
 //   {
@@ -18,29 +23,30 @@ const validateEmail = (email: string) => {
 };
 
 export default function Auth({}: Props): ReactElement {
-  useEffect(() => {
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
-        query {
-          greetingAnonymous
-          {
-           message
-            success
-          }
-        }`,
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => console.log({ err }))
-      .then((res) => {
-        console.log({ res });
-      });
-  }, []);
+  //DUMMY QUERY TO TEST GRAPHQL
+  //   useEffect(() => {
+  //     fetch("http://localhost:8000/graphql", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         query: `
+  //         query {
+  //           greetingAnonymous
+  //           {
+  //            message
+  //             success
+  //           }
+  //         }`,
+  //       }),
+  //     })
+  //       .then((res) => {
+  //         return res.json();
+  //       })
+  //       .catch((err) => console.log({ err }))
+  //       .then((res) => {
+  //         console.log({ res });
+  //       });
+  //   }, []);
   const [login, setLogin] = useState(true);
 
   const switchPage = () => {
@@ -65,10 +71,14 @@ export default function Auth({}: Props): ReactElement {
 function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
   const [errors, setErrors] = useState<string[]>([]);
 
+  const [showSnackBar, setShowSnackBar] = useState<boolean>(false);
+
   const [authToken, setAuthToken] = useState("");
 
   const [email, setEmail, resetEmail] = useInputState();
   const [pass, setPass, resetPass] = useInputState();
+
+  const AuthContext = useAuth();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -106,8 +116,22 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
       .catch((err) => console.log({ err }))
       .then((res) => {
         console.log(res.message);
-        if (res.success) setAuthToken(res.message);
+        if (res.success) {
+          setAuthToken(res.message);
+          const signedInUser: IUser = {
+            authToken: res.message,
+            username: res.username,
+            id: res.id,
+          };
+          AuthContext?.setCurrentUser(signedInUser);
+          startTimer();
+        }
       });
+  };
+
+  const startTimer = () => {
+    setShowSnackBar(true);
+    setTimeout(() => setShowSnackBar(false), 5000);
   };
 
   const query2 = `query{
@@ -118,26 +142,26 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
         }
   }`;
 
-  const loginChecker = () => {
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "auth-token": authToken },
-      body: JSON.stringify({
-        query: query2,
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => console.log({ err }))
-      .then((res) => {
-        console.log({ res });
-      });
-  };
+  // const loginChecker = () => {
+  //   fetch("http://localhost:8000/graphql", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json", "auth-token": authToken },
+  //     body: JSON.stringify({
+  //       query: query2,
+  //     }),
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .catch((err) => console.log({ err }))
+  //     .then((res) => {
+  //       console.log({ res });
+  //     });
+  // };
 
   return (
     <React.Fragment>
-      <button onClick={loginChecker}>Are you logged in</button>
+      {/* <button onClick={loginChecker}>Are you logged in</button> */}
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         {errors.map((err) => {
@@ -177,6 +201,8 @@ function SignIn({ switchPage }: { switchPage: () => void }): ReactElement {
       <span>
         Don't have an account? <span onClick={switchPage}>Register</span>{" "}
       </span>
+      {showSnackBar && <Snackbar />}
+      {/* <Snackbar /> */}
     </React.Fragment>
   );
 }

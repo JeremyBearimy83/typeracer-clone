@@ -1,12 +1,13 @@
 import React, { ReactElement, useContext, useState } from "react";
-import { User, Nullable } from "../utils/types";
+import { IUser, Nullable } from "../utils/types";
 
 interface Props {
   children: ReactElement;
 }
 
 interface Value {
-  currentUser: Nullable<User>;
+  currentUser: Nullable<IUser>;
+  setCurrentUser: any;
   register: (email: string, password: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -19,7 +20,7 @@ export function useAuth() {
 }
 
 export default function AuthProvider({ children }: Props): ReactElement {
-  const [currentUser, setCurrentUser] = useState<Nullable<User>>(null);
+  const [currentUser, setCurrentUser] = useState<Nullable<IUser>>(null);
 
   const register = async (email: string, password: string) => {};
 
@@ -27,8 +28,9 @@ export default function AuthProvider({ children }: Props): ReactElement {
 
   const logout = async () => {};
 
-  const value = {
+  const value: Value = {
     currentUser,
+    setCurrentUser,
     register,
     login,
     logout,

@@ -38,7 +38,6 @@ html {
   background-color: #ebf7fd;
 }
 
-
 *,
 *::after,
 *::before {
@@ -82,7 +81,6 @@ button {
   cursor: pointer;
   font-family: $font-family, sans-serif, serif;
 
-
   &:focus {
     outline: none;
   }
@@ -94,7 +92,4 @@ button {
 @import "./styles/home";
 @import "./styles/game";
 @import "./styles/room";
-
-
-
-
+@import "./styles/snackbar";

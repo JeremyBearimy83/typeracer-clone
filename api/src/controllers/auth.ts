@@ -127,7 +127,16 @@ export const userLogIn = async (
     expiresIn: "1d",
   });
   // res.header("auth-token", token).send({ message: token, success: true });
-  res.send({ message: token, success: true });
+
+  //TODO: RETURN FULL USER INSTANCE
+  //FOR NOW THIS IS JUST USERNAME,
+  // LATER I'LL CHANGE IT TO THE WHOLE USER INSTANCE FOR HISTORY AND STATS AND ALL
+  res.send({
+    message: token,
+    success: true,
+    username: user.username,
+    id: user._id,
+  });
 
   //   const token = jwt.sign(
   //     { id: user._id, name: user.name, email: user.email },

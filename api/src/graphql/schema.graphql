@@ -5,10 +5,17 @@ type Query {
 
 type Mutation {
   userSignUp(username: String, email: String, password: String): Response
-  userLogIn(email: String, password: String): Response
+  userLogIn(email: String, password: String): LoginResponse
 }
 
 type Response {
   message: String
   success: Boolean
+}
+
+type LoginResponse {
+  message: String
+  success: Boolean
+  username: String
+  id: String
 }

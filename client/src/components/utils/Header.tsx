@@ -10,7 +10,9 @@ interface Props {}
 
 export default function Header(): ReactElement {
   //USER IS THE USER FROM THE AUTHCONTEXT
-  const User = useAuth()?.currentUser;
+  const currentUser = useAuth()?.currentUser;
+  const logOut = useAuth()?.logout;
+
   return (
     <React.Fragment>
       <div className="header">
@@ -21,15 +23,25 @@ export default function Header(): ReactElement {
         <div className="right">
           <div className="player">
             <i className="fas fa-user"></i>
-            <span>{User ? `${User.username}` : `Guest`}</span>
+            <span>{currentUser ? `${currentUser.username}` : `Guest`}</span>
             {/* #1337 */}
           </div>
           <Link to="/auth">
-            <button>
-              <i className="fas fa-sign-in-alt"></i>
-              Sign In
-            </button>
+            {/* IF USER PRESENT DON'T SHOW SIGN IN BUTTON */}
+            {!currentUser && (
+              <button>
+                <i className="fas fa-sign-in-alt"></i>
+                Sign In
+              </button>
+            )}
           </Link>
+          {/* ONLY IF USER PRESENT SHOW SIGN OUT BUTTON */}
+          {currentUser && (
+            <button onClick={logOut}>
+              <i className="fas fa-sign-out-alt"></i>
+              Sign out
+            </button>
+          )}
         </div>
       </div>
       <nav className="nav">

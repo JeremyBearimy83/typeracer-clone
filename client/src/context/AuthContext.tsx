@@ -24,9 +24,13 @@ export default function AuthProvider({ children }: Props): ReactElement {
 
   const register = async (email: string, password: string) => {};
 
+  //OK I FUCKED UP AND IMPLEMENTED THIS SOMEWHERE ELSE, TO LAZY TO CHANGE RIGHT NOW
+  //HAVE TO REFACTOR A LOT OF CODE ANYWAYS
   const login = async (email: string, password: string) => {};
 
-  const logout = async () => {};
+  const logout = async () => {
+    setCurrentUser(null);
+  };
 
   const value: Value = {
     currentUser,

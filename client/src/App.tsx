@@ -7,6 +7,8 @@ import Header from "./components/utils/Header";
 import Game from "./components/pages/Game";
 import Room from "./components/pages/Room";
 
+import AuthenticatedRoute from "./components/utils/AuthenticateRoute";
+
 export default function App(): ReactElement {
   return (
     // Implement an error boundary
@@ -19,7 +21,7 @@ export default function App(): ReactElement {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/auth" component={Auth} />
-        <Route path="/play" component={Play} />
+        <AuthenticatedRoute path="/play" Component={Play} />
         <Route exact path="/room/:id" component={Room} />
         <Route path="/room/:id/game" component={Game} />
         <Route path="*">
